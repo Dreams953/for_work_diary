@@ -93,13 +93,13 @@ body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: va
 .add-btn { background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); padding: 9px 18px; font-size: 13px; font-family: inherit; font-weight: 500; cursor: pointer; white-space: nowrap; }
 .add-btn:hover { background: #1e4a70; }
 
-.add-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 20px; display: none; }
+.add-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 20px; display: none; overflow: auto; resize: both; min-width: 260px; }
 .add-form.open { display: block; }
 .form-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
 .form-input { flex: 1; min-width: 180px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px; font-family: inherit; color: var(--text); }
 .form-input:focus { outline: none; border-color: var(--accent); }
 .form-select { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 12px; font-family: inherit; color: var(--text); cursor: pointer; }
-.form-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px; font-family: inherit; color: var(--text); resize: vertical; min-height: 60px; }
+.form-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px; font-family: inherit; color: var(--text); resize: both; min-height: 60px; }
 .form-textarea:focus { outline: none; border-color: var(--accent); }
 .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .time-inp { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; font-size: 13px; font-family: 'DM Mono', monospace; color: var(--text); width: 90px; }
@@ -132,7 +132,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: va
 .task-name { font-size: 14px; color: var(--text); }
 .task-item.done-item .task-name { text-decoration: line-through; color: var(--text3); }
 .cat-tag { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
-.task-note { font-size: 12px; color: var(--text3); margin-top: 3px; line-height: 1.5; }
+.task-note { font-size: 12px; color: var(--text3); margin-top: 3px; line-height: 1.5; white-space: pre-wrap; }
 .task-done-time { font-size: 11px; color: var(--done-text); margin-top: 2px; font-family: 'DM Mono', monospace; }
 .task-actions { display: flex; gap: 4px; flex-shrink: 0; padding-top: 1px; }
 .icon-btn { background: none; border: none; cursor: pointer; color: var(--text3); padding: 2px 4px; border-radius: 4px; font-size: 13px; }
@@ -140,11 +140,12 @@ body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: va
 .icon-btn.edit:hover { color: var(--accent); background: var(--accent-light, #e8f0f8); }
 
 /* Edit task modal */
-.edit-modal { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); width: 480px; max-width: 95vw; }
+.edit-modal { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); width: min(680px, 95vw); max-height: 92vh; overflow: auto; resize: both; }
+.edit-modal .modal-foot { position: sticky; bottom: 0; background: var(--surface); z-index: 1; }
 .edit-field-label { font-size: 11px; color: var(--text3); margin-bottom: 5px; font-weight: 500; letter-spacing: 0.04em; }
 .edit-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 14px; font-family: inherit; color: var(--text); }
 .edit-input:focus { outline: none; border-color: var(--accent); }
-.edit-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 13px; font-family: inherit; color: var(--text); resize: vertical; min-height: 80px; line-height: 1.6; }
+.edit-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 13px; font-family: inherit; color: var(--text); resize: both; min-height: 80px; line-height: 1.6; }
 .edit-textarea:focus { outline: none; border-color: var(--accent); }
 .edit-select { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 10px; font-size: 13px; font-family: inherit; color: var(--text); cursor: pointer; }
 .edit-select:focus { outline: none; border-color: var(--accent); }
@@ -170,7 +171,7 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
 .diary-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .diary-task-name { font-size: 13px; color: var(--text); }
 .diary-meta { font-size: 11px; color: var(--text3); margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; }
-.diary-note-text { font-size: 12px; color: var(--text2); margin-top: 3px; }
+.diary-note-text { font-size: 12px; color: var(--text2); margin-top: 3px; white-space: pre-wrap; }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 13px; }
 .print-btn { background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 16px; font-size: 12px; font-family: inherit; cursor: pointer; color: var(--text2); }
 .print-btn:hover { background: var(--surface2); }
@@ -236,7 +237,7 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
 .review-entry-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 .review-entry-name { font-size: 13px; color: var(--text); flex: 1; }
 .review-entry-meta { font-size: 11px; color: var(--text3); margin-top: 2px; display: flex; gap: 6px; flex-wrap: wrap; }
-.review-entry-note { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.review-entry-note { font-size: 11px; color: var(--text2); margin-top: 2px; white-space: pre-wrap; }
 .review-empty { text-align: center; padding: 50px 20px; color: var(--text3); font-size: 13px; }
 .highlight { background: #FFF3C4; border-radius: 2px; padding: 0 1px; }
 
@@ -256,6 +257,26 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
 .todo-day-tasks { }
 .todo-day-today .todo-day-head { color: var(--accent); border-color: var(--accent); }
 .todo-period-empty { text-align: center; padding: 48px 20px; color: var(--text3); font-size: 13px; }
+
+/* Security check */
+.sec-check-row { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.sec-status { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
+.sec-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); flex-shrink: 0; }
+.sec-dot.ok { background: #2A6B3A; }
+.sec-dot.warn { background: #C04040; }
+.sec-dot.checking { background: #BA7517; animation: pulse 1s infinite; }
+.sec-warn-panel { background: #FEF0F0; border: 1px solid #E8B0B0; border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 6px; display: none; }
+.sec-warn-panel.show { display: block; }
+.sec-warn-title { font-size: 11px; font-weight: 500; color: #A03030; margin-bottom: 5px; }
+.sec-warn-body { font-size: 10px; color: #7A2020; line-height: 1.6; margin-bottom: 7px; }
+.sec-rules-pre { background: #fff; border: 1px solid #E8B0B0; border-radius: 4px; padding: 7px 9px; font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text); white-space: pre; overflow-x: auto; margin-bottom: 6px; line-height: 1.5; }
+.sec-copy-btn { font-size: 10px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; cursor: pointer; color: var(--text2); font-family: inherit; }
+.sec-copy-btn:hover { background: var(--surface2); }
+.sec-ok-msg { font-size: 10px; color: #2A6B3A; margin-top: 5px; display: none; }
+.sec-ok-msg.show { display: block; }
+.sec-check-btn { font-size: 10px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; cursor: pointer; color: var(--text2); font-family: inherit; white-space: nowrap; }
+.sec-check-btn:hover { background: var(--surface2); }
+.sec-last-check { font-size: 10px; color: var(--text3); margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -305,9 +326,9 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
     </div>
     <!-- Firebase設定パネル -->
     <div id="fb-config-panel">
-      <div style="font-size:11px;color:var(--text3);margin-bottom:6px;line-height:1.6">Firebase Realtime DatabaseのURLとAPIキーを入力してください</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:6px;line-height:1.6">Firebase Realtime DatabaseのURLとシークレットキーを入力してください</div>
       <input class="sync-input" id="fb-db-url" placeholder="Database URL（例: https://xxx.firebasedatabase.app）" />
-      <input class="sync-input" id="fb-api-key" type="password" placeholder="Web APIキー（AIza...）" />
+      <input class="sync-input" id="fb-api-key" type="password" placeholder="データベースシークレット（プロジェクト設定 › サービスアカウント）" />
       <button class="sync-btn primary" style="width:100%;margin-top:2px" onclick="fbConnect()">接続する</button>
     </div>
     <!-- 接続済みパネル -->
@@ -321,12 +342,30 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
       </div>
     </div>
     <div class="sync-msg" id="sync-msg"></div>
-    <div style="margin-top:8px;font-size:10px;color:var(--text3);line-height:1.7">
+    <div id="fb-setup-guide" style="margin-top:8px;font-size:10px;color:var(--text3);line-height:1.7">
       ① Firebase Console でプロジェクト作成<br>
       ② Realtime Database を有効化<br>
-      ③ プロジェクトID・APIキーを上欄に入力<br>
-      ④ 他端末でも同じ情報を入力するだけ
+      ③ プロジェクト設定 › サービスアカウント › データベースシークレットを取得<br>
+      ④ セキュリティルール：<code style="font-size:10px;background:var(--surface2);padding:0 3px;border-radius:3px">auth != null</code> を推奨<br>
+      ⑤ 他端末でも同じURLとシークレットを入力するだけ
     </div>
+    <!-- セキュリティチェック -->
+    <div class="sec-check-row">
+      <div style="font-size:10px;font-weight:500;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase">セキュリティ</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="sec-status"><div class="sec-dot" id="sec-dot"></div><span id="sec-status-text">未チェック</span></div>
+        <button class="sec-check-btn" onclick="fbSecurityCheck(true)">確認</button>
+      </div>
+    </div>
+    <div class="sec-warn-panel" id="sec-warn-panel">
+      <div class="sec-warn-title">⚠ セキュリティルールが公開状態です</div>
+      <div class="sec-warn-body">認証なしでデータベースへのアクセスが可能な状態です。Firebase ConsoleでセキュリティルールをDBに適用してください。</div>
+      <div style="font-size:10px;color:var(--text3);margin-bottom:4px">推奨ルール（Firebase Console › Realtime Database › ルール）:</div>
+      <pre class="sec-rules-pre" id="sec-rules-pre"></pre>
+      <button class="sec-copy-btn" id="sec-copy-btn" onclick="copySecRules()">ルールをコピー</button>
+    </div>
+    <div class="sec-ok-msg" id="sec-ok-msg">✓ セキュリティルールは適切です</div>
+    <div class="sec-last-check" id="sec-last-check"></div>
   </div>
 </div>
 
@@ -475,13 +514,17 @@ input:checked + .toggle-track::before { transform: translateX(16px); }
 </div>
 
 <!-- Edit Task Modal -->
-<div class="modal-overlay" id="edit-modal" onclick="if(event.target===this)closeEditModal()">
+<div class="modal-overlay" id="edit-modal" onmousedown="if(event.target===this)this._canClose=true;else this._canClose=false" onclick="if(event.target===this&&this._canClose)closeEditModal()">
   <div class="modal edit-modal">
     <div class="modal-head">
       <div class="modal-title">タスクを編集</div>
       <button class="modal-close" onclick="closeEditModal()">✕</button>
     </div>
     <div class="modal-body">
+      <div class="edit-field">
+        <div class="edit-field-label">日付</div>
+        <input class="edit-input" id="edit-date" type="date" style="font-family:'DM Mono',monospace;font-size:13px" />
+      </div>
       <div class="edit-field">
         <div class="edit-field-label">タスク名</div>
         <input class="edit-input" id="edit-name" />
@@ -759,11 +802,26 @@ function addTask() {
 }
 
 let editingTaskId = null;
+let editingTaskDate = null;
+
+function findTaskAcrossDates(id) {
+  // First check selDate, then search all dates
+  const directHit = getTasks(selDate).find(t => t.id === id);
+  if (directHit) return { task: directHit, date: selDate };
+  for (const dk of Object.keys(tasks)) {
+    const t = (tasks[dk] || []).find(t => t.id === id);
+    if (t) return { task: t, date: dk };
+  }
+  return null;
+}
 
 function openEditModal(id) {
-  const t = getTasks(selDate).find(t => t.id === id);
-  if (!t) return;
+  const found = findTaskAcrossDates(id);
+  if (!found) return;
+  const { task: t, date: dk } = found;
   editingTaskId = id;
+  editingTaskDate = dk;
+  document.getElementById('edit-date').value = dk;
   document.getElementById('edit-name').value = t.name;
   document.getElementById('edit-note').value = t.note || '';
   document.getElementById('edit-start').value = t.startTime || '';
@@ -779,6 +837,7 @@ function openEditModal(id) {
 
 function closeEditModal() {
   editingTaskId = null;
+  editingTaskDate = null;
   document.getElementById('edit-modal').classList.remove('open');
 }
 
@@ -787,7 +846,8 @@ function toggleEditDoneTime(checked) {
 }
 
 function saveEditTask() {
-  const t = getTasks(selDate).find(t => t.id === editingTaskId);
+  const srcDate = editingTaskDate || selDate;
+  const t = getTasks(srcDate).find(t => t.id === editingTaskId);
   if (!t) return;
   const name = document.getElementById('edit-name').value.trim();
   if (!name) { document.getElementById('edit-name').focus(); return; }
@@ -798,12 +858,18 @@ function saveEditTask() {
   t.note = document.getElementById('edit-note').value.trim();
   t.startTime = document.getElementById('edit-start').value;
   t.endTime = document.getElementById('edit-end').value;
-  const wasDone = t.done;
   t.done = document.getElementById('edit-done').checked;
   if (t.done) {
     t.doneAt = document.getElementById('edit-done-time').value.trim() || null;
   } else {
     t.doneAt = null;
+  }
+  // 日付変更：別の日付に移動
+  const newDate = document.getElementById('edit-date').value;
+  if (newDate && newDate !== srcDate) {
+    tasks[srcDate] = (tasks[srcDate] || []).filter(task => task.id !== editingTaskId);
+    if (!tasks[newDate]) tasks[newDate] = [];
+    tasks[newDate].push(t);
   }
   saveTasks();
   closeEditModal();
@@ -812,7 +878,8 @@ function saveEditTask() {
 
 function deleteEditTask() {
   if (!editingTaskId) return;
-  tasks[selDate] = getTasks(selDate).filter(t => t.id !== editingTaskId);
+  const srcDate = editingTaskDate || selDate;
+  tasks[srcDate] = (tasks[srcDate] || []).filter(t => t.id !== editingTaskId);
   saveTasks();
   closeEditModal();
   renderAll();
@@ -1290,10 +1357,12 @@ async function fbConnect() {
 
   document.getElementById('fb-config-panel').style.display    = 'none';
   document.getElementById('fb-connected-panel').style.display = 'block';
+  document.getElementById('fb-setup-guide').style.display     = 'none';
   setSyncStatus('syncing', '読込中…');
 
   await fbPull();
   fbStartListening();
+  startSecCheckSchedule();
 }
 
 function fbDisconnect() {
@@ -1305,8 +1374,10 @@ function fbDisconnect() {
   document.getElementById('fb-api-key').value  = '';
   document.getElementById('fb-config-panel').style.display    = 'block';
   document.getElementById('fb-connected-panel').style.display = 'none';
+  document.getElementById('fb-setup-guide').style.display     = 'block';
   setSyncStatus('', '未設定');
   setSyncMsg('');
+  stopSecCheckSchedule();
 }
 
 async function fbPull() {
@@ -1403,6 +1474,107 @@ function fbSchedulePush() {
   if (!fbDbUrl || !fbApiKey || isSyncing) return;
   clearTimeout(fbPushTimer);
   fbPushTimer = setTimeout(fbPush, 1500);
+}
+
+/* ══════════════════════════════════════
+   FIREBASE SECURITY CHECK
+══════════════════════════════════════ */
+const SEC_RULES = `{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}`;
+let secCheckTimer = null;
+
+function setSecStatus(state, text) {
+  const dot = document.getElementById('sec-dot');
+  const txt = document.getElementById('sec-status-text');
+  if (!dot || !txt) return;
+  dot.className = 'sec-dot' + (state ? ' ' + state : '');
+  txt.textContent = text;
+}
+
+async function fbSecurityCheck(manual = false) {
+  if (!fbDbUrl) { setSecStatus('', '未接続'); return; }
+  setSecStatus('checking', 'チェック中…');
+  document.getElementById('sec-warn-panel').classList.remove('show');
+  document.getElementById('sec-ok-msg').classList.remove('show');
+  document.getElementById('sec-rules-pre').textContent = SEC_RULES;
+
+  try {
+    const ctrl = new AbortController();
+    const tid  = setTimeout(() => ctrl.abort(), 8000);
+    const res  = await fetch(`${fbDbUrl}/.json?shallow=true`, { signal: ctrl.signal });
+    clearTimeout(tid);
+
+    const now = new Date().toLocaleString('ja-JP', {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    });
+    localStorage.setItem('fb_sec_last_check', now);
+    localStorage.setItem('fb_sec_status', res.ok ? 'warn' : 'ok');
+    document.getElementById('sec-last-check').textContent = `最終チェック: ${now}`;
+
+    if (res.ok) {
+      setSecStatus('warn', '要対応');
+      document.getElementById('sec-warn-panel').classList.add('show');
+    } else if (res.status === 401 || res.status === 403) {
+      setSecStatus('ok', '安全');
+      document.getElementById('sec-ok-msg').classList.add('show');
+    } else {
+      setSecStatus('', `確認失敗 (${res.status})`);
+    }
+  } catch(e) {
+    setSecStatus('', e.name === 'AbortError' ? 'タイムアウト' : 'チェック失敗');
+  }
+}
+
+function copySecRules() {
+  const btn = document.getElementById('sec-copy-btn');
+  const done = () => {
+    btn.textContent = 'コピー完了！';
+    setTimeout(() => { btn.textContent = 'ルールをコピー'; }, 2000);
+  };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(SEC_RULES).then(done).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = SEC_RULES; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta); done();
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = SEC_RULES; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta); done();
+  }
+}
+
+function startSecCheckSchedule() {
+  if (secCheckTimer) { clearInterval(secCheckTimer); secCheckTimer = null; }
+  document.getElementById('sec-rules-pre').textContent = SEC_RULES;
+  // 前回チェック結果を復元
+  const last   = localStorage.getItem('fb_sec_last_check');
+  const status = localStorage.getItem('fb_sec_status');
+  if (last) document.getElementById('sec-last-check').textContent = `最終チェック: ${last}`;
+  if (status === 'warn') {
+    setSecStatus('warn', '要対応');
+    document.getElementById('sec-warn-panel').classList.add('show');
+  } else if (status === 'ok') {
+    setSecStatus('ok', '安全');
+    document.getElementById('sec-ok-msg').classList.add('show');
+  }
+  // 接続確立後に少し待ってからチェック実行
+  setTimeout(fbSecurityCheck, 2000);
+  // 6時間ごとに定期チェック
+  secCheckTimer = setInterval(() => { if (fbDbUrl) fbSecurityCheck(); }, 6 * 60 * 60 * 1000);
+}
+
+function stopSecCheckSchedule() {
+  if (secCheckTimer) { clearInterval(secCheckTimer); secCheckTimer = null; }
+  setSecStatus('', '未チェック');
+  document.getElementById('sec-warn-panel').classList.remove('show');
+  document.getElementById('sec-ok-msg').classList.remove('show');
+  document.getElementById('sec-last-check').textContent = '';
 }
 
 // saveTasks / saveCats はオリジナルのまま使い、
